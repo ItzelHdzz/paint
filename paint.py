@@ -72,7 +72,27 @@ def rectangle(start, end):
 
 def triangle(start, end):
     """Draw triangle from start to end."""
-    pass  # TODO
+    up()
+    goto(start.x, start.y)
+    down()
+    begin_fill()
+
+    # Length of the line segment between start and end
+    length = math.sqrt((end.x - start.x)**2 + (end.y - start.y)**2)
+
+    # Angle of the line segment
+    angle = math.atan2(end.y - start.y, end.x - start.x)
+
+    # Coordinates of the third vertex (assuming equilateral triangle)
+    third_x = end.x + length * math.cos(angle + (2 * math.pi / 3))
+    third_y = end.y + length * math.sin(angle + (2 * math.pi / 3))
+
+    # Draw the triangle
+    goto(end.x, end.y)
+    goto(third_x, third_y)
+    goto(start.x, start.y)
+
+    end_fill()
 
 
 def tap(x, y):
