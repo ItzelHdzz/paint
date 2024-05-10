@@ -1,7 +1,7 @@
 """Paint, for drawing shapes.
-    Ana Itzel Hernandez Garcia
-    Paola Rojas Dominguez
-    
+    Ana Itzel Hernandez Garcia A01737526
+    Paola Rojas Dominguez A01737136
+
 Changes made:
     -Pink color added
     -Circle function completed
