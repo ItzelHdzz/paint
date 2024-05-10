@@ -3,46 +3,17 @@ Alumnas: </br>
   Ana Itzel Hernández García A01737526 </br>
   Paola Rojas Domínguez A01737136 </br>
 <h2>Paint</h2>
+<h3>Descripción</h3>
+Dibuja líneas y formas en la pantalla. Haga clic para marcar el inicio de una forma y haga clic nuevamente para marcar su final. Se pueden seleccionar diferentes formas y colores mediante el teclado.
+<h3>Cambios realizados</h3>
+Se añadió el color rosa
 
 ```python
-"""Paint, for drawing shapes.
-    Ana Itzel Hernandez Garcia A01737526
-    Paola Rojas Dominguez A01737136
+onkey(lambda: color('pink'), 'P')
+```
+Se completo la función para diujar un círculo
 
-Changes made:
-    -Pink color added
-    -Circle function completed
-    -Rectangle function completed
-    -Triangle function completed
-"""
-
-#Import libraries
-from turtle import *
-from freegames import vector
-import math
-
-def line(start, end):
-    """Draw line from start to end."""
-    up()
-    goto(start.x, start.y)
-    down()
-    goto(end.x, end.y)
-
-
-def square(start, end):
-    """Draw square from start to end."""
-    up()
-    goto(start.x, start.y)
-    down()
-    begin_fill()
-
-    for count in range(4):
-        forward(end.x - start.x)
-        left(90)
-
-    end_fill()
-
-
+```python
 def circle(start, end):
     """Draw circle from start to end."""
     up()
@@ -58,8 +29,9 @@ def circle(start, end):
         left(1)
         angle -= 1
     end_fill()
-
-
+```
+Se completó la función para dibujar un rectángulo
+```python
 def rectangle(start, end):
     """Draw rectangle from start to end."""
     up()
@@ -74,8 +46,9 @@ def rectangle(start, end):
         left(90)
 
     end_fill()
-
-
+```
+Se completó la función para dibujar un triángulo
+```python
 def triangle(start, end):
     """Draw triangle from start to end."""
     up()
@@ -99,106 +72,50 @@ def triangle(start, end):
     goto(start.x, start.y)
 
     end_fill()
-
-
-def tap(x, y):
-    """Store starting point or draw shape."""
-    start = state['start']
-
-    if start is None:
-        state['start'] = vector(x, y)
-    else:
-        shape = state['shape']
-        end = vector(x, y)
-        shape(start, end)
-        state['start'] = None
-
-
-def store(key, value):
-    """Store value in state at key."""
-    state[key] = value
-
-
-state = {'start': None, 'shape': line}
-setup(420, 420, 370, 0)
-onscreenclick(tap)
-listen()
-onkey(undo, 'u')
-#Colors you can draw with
-onkey(lambda: color('black'), 'K')
-onkey(lambda: color('white'), 'W')
-onkey(lambda: color('green'), 'G')
-onkey(lambda: color('blue'), 'B')
-onkey(lambda: color('red'), 'R')
-onkey(lambda: color('pink'), 'P') #New color added
-#Figures that can be drawn
-onkey(lambda: store('shape', line), 'l')
-onkey(lambda: store('shape', square), 's')
-onkey(lambda: store('shape', circle), 'c')
-onkey(lambda: store('shape', rectangle), 'r')
-onkey(lambda: store('shape', triangle), 't')
-done()
 ```
-
 <h2>Snake</h2>
+<h3>Descripción</h3>
+Clásico juego de arcade. Utilice las teclas de flecha para navegar y comer la comida. Cada vez que se consuma, la serpiente crece un segmento más. ¡Evita comerte o salirte de los límites!
+<h3>Cambios realizados</h3>
+La comida se mueve un espacio cada vez que la serpiente cambia de dirección
+```python
+```
+La serpiente y la comida cambian de color cada vez que se inicia el juego
 ```python
 ```
 <h2>Pacman</h2>
+<h3>Descripción</h3>
+Clásico juego de arcade. Usa las teclas de flecha para navegar y comer toda la comida blanca. Cuidado con los fantasmas rojos que deambulan por el laberinto.
+<h3>Cambios realizados</h3>
+Los fantasmas siguen de mejor forma a pacman
+```python
+```
+El tablero fue modigficado
+```python
+```
+Los fantasmas son más rápidos
 ```python
 ```
 <h2>Cannon</h2>
+<h3>Descripción</h3>
+Movimiento de proyectiles. Haz clic en la pantalla para disparar tu bala de cañón. La bala de cañón hace estallar globos azules a su paso. Explota todos los globos antes de que puedan cruzar la pantalla.
+<h3>Cambios realizados</h3>
+La velocidad de la bala es mayor
+```python
+```
+Los globos se mueven más rápido
+```python
+```
+El juego es infinito
 ```python
 ```
 <h2>Memory</h2>
+<h3>Descripción</h3>
+Juego de rompecabezas de pares de números. Haga clic en un mosaico para revelar un número. Haga coincidir dos números y las fichas desaparecerán para revelar una imagen.
+<h3>Cambios realizados</h3>
+Se añadió con contador de taps
 
 ```python
-"""Memory, puzzle game of number pairs.
-    Ana Itzel Hernandez Garcia A01737526
-    Paola Rojas Dominguez A01737136
-
-Changes made:
-    -The number of taps are counted and displayed
-    -Detect when all boxes have been uncovered
-    -The digit is centered in the box
-    -Letters are used instead of numbers
-"""
-
-#Import libraries
-from random import shuffle
-from turtle import *
-from freegames import path
-
-#Variables are set
-car = path('car.gif')
-#List of letters
-letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'Ñ', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'aa', 'bb', 'cc', 'dd', 'ee']  * 2
-state = {'mark': None, 'won' : False}
-hide = [True] * 64
-counter = 0 #variable that keeps the tap count
-
-def square(x, y):
-    """Draw white square with black outline at (x, y)."""
-    up()
-    goto(x, y)
-    down()
-    color('black', 'white')
-    begin_fill()
-    for _ in range(4):
-        forward(50)
-        left(90)
-    end_fill()
-
-
-def index(x, y):
-    """Convert (x, y) coordinates to tiles index."""
-    return int((x + 200) // 50 + ((y + 200) // 50) * 8)
-
-
-def xy(count):
-    """Convert tiles count to (x, y) coordinates."""
-    return (count % 8) * 50 - 200, (count // 8) * 50 - 200
-
-
 def tap(x, y):
     """Update mark and hidden tiles based on tap."""
     global counter
@@ -212,49 +129,29 @@ def tap(x, y):
         hide[spot] = False
         hide[mark] = False
         state['mark'] = None
+```
+Los dígitos están centrados
 
-
-def draw():
-    """Draw image and tiles."""
-    clear()
-    goto(0, 0)
-    shape(car)
-    stamp()
-
-    for count in range(64):
-        if hide[count]:
-            x, y = xy(count)
-            square(x, y)
-
-    mark = state['mark']
-
-    if mark is not None and hide[mark]:
+```python
+if mark is not None and hide[mark]:
         x, y = xy(mark)
         up()
         goto(x + 10, y + 10)
         color('black')
         write(letters[mark], font=('Arial', 30, 'normal'))
+```
+Se notifica cuando se desbloquearon todos los cuadros
 
-    if not any(hide) and not state['won']:
+```python
+if not any(hide) and not state['won']:
         up()
         goto(-200, 100)
         color('red')
-        write("Congratulations! You have found all the pairs", font=('Arial', 15, 'normal')) # The message appears when all the boxes have been uncovered
+        write("Congratulations! You have found all the pairs", font=('Arial', 15, 'normal'))
         #state['won'] = True
+```
 
-    up()
-    goto(200, 200)
-    color('red')
-    write(counter, font=('Arial', 20, 'normal')) #The counter is displayed
-    update()
-    ontimer(draw, 100)
-
-shuffle(letters)
-setup(420, 420, 370, 0)
-addshape(car)
-hideturtle()
-tracer(False)
-onscreenclick(tap)
-draw()
-done()
+Se usan letras en lugar de números
+```python
+letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'Ñ', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'aa', 'bb', 'cc', 'dd', 'ee']  * 2
 ```
