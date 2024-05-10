@@ -1,24 +1,26 @@
 """Memory, puzzle game of number pairs.
+    Ana Itzel Hernandez Garcia A01737526
+    Paola Rojas Dominguez A01737136
 
-Exercises:
-
-1. Count and print how many taps occur.
-2. Decrease the number of tiles to a 4x4 grid.
-3. Detect when all tiles are revealed.
-4. Center single-digit tile.
-5. Use letters instead of tiles.
+Changes made:
+    -The number of taps are counted and displayed
+    -Detect when all boxes have been uncovered
+    -The digit is centered in the box
+    -Letters are used instead of numbers
 """
 
+#Import libraries
 from random import shuffle
 from turtle import *
-
 from freegames import path
 
+#Variables are set
 car = path('car.gif')
+#List of letters
 letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'Ñ', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'aa', 'bb', 'cc', 'dd', 'ee']  * 2
 state = {'mark': None, 'won' : False}
 hide = [True] * 64
-counter = 0
+counter = 0 #variable that keeps the tap count
 
 def square(x, y):
     """Draw white square with black outline at (x, y)."""
@@ -81,15 +83,15 @@ def draw():
 
     if not any(hide) and not state['won']:
         up()
-        goto(-200, 100) # Mueve el cursor al centro de la pantalla
+        goto(-200, 100)
         color('red')
-        write("¡Felicidades! Has encontrado todos los pares", font=('Arial', 15, 'normal'))
+        write("Congratulations! You have found all the pairs", font=('Arial', 15, 'normal')) # The message appears when all the boxes have been uncovered
         #state['won'] = True
 
     up()
     goto(200, 200)
     color('red')
-    write(counter, font=('Arial', 20, 'normal'))
+    write(counter, font=('Arial', 20, 'normal')) #The counter is displayed
     update()
     ontimer(draw, 100)
 
