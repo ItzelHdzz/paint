@@ -141,6 +141,14 @@ done()
 ```
 
 <h2>Snake</h2>
+```python
+```
 <h2>Pacman</h2>
+```python
+```
 <h2>Cannon</h2>
+```python
+```
 <h2>Memory</h2>
+```python
+```
