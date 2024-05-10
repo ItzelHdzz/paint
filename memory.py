@@ -15,8 +15,13 @@ from turtle import *
 from freegames import path
 
 car = path('car.gif')
+<<<<<<< HEAD
 letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'Ñ', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4', '5']  * 2
 state = {'mark': None}
+=======
+tiles = list(range(32)) * 2
+state = {'mark': None, 'won' : False}
+>>>>>>> origin/memorI
 hide = [True] * 64
 counter = 0
 
@@ -75,14 +80,26 @@ def draw():
     if mark is not None and hide[mark]:
         x, y = xy(mark)
         up()
-        goto(x + 2, y)
+        goto(x + 10, y + 10)
         color('black')
+<<<<<<< HEAD
         write(letters[mark], font=('Arial', 30, 'normal'))
     
     up()
     goto(200, 200)
     color('red')
     write(counter, font=('Arial', 20, 'normal'))
+=======
+        write(tiles[mark], font=('Arial', 20, 'normal'))
+
+    if not any(hide) and not state['won']:
+        up()
+        goto(-200, 100) # Mueve el cursor al centro de la pantalla
+        color('red')
+        write("¡Felicidades! Has encontrado todos los pares", font=('Arial', 15, 'normal'))
+        #state['won'] = True
+
+>>>>>>> origin/memorI
     update()
     ontimer(draw, 100)
 
