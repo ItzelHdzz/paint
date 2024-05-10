@@ -148,7 +148,16 @@ def move():
         goto(point.x + 10, point.y + 10)
         dot(20, 'red')
 
+        #Variable de distancia entre el fantasma y Pacman
+        dist = abs(pacman - point)
+
+        #Si estan cerca el fantasma seguira a pacman
+        if dist < 100:
+            course.x = aim.x
+            course.y = aim.y
+
     update()
+
 
     for point, course in ghosts:
         if abs(pacman - point) < 20:
