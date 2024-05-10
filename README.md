@@ -101,14 +101,30 @@ Los fantasmas son más rápidos
 Movimiento de proyectiles. Haz clic en la pantalla para disparar tu bala de cañón. La bala de cañón hace estallar globos azules a su paso. Explota todos los globos antes de que puedan cruzar la pantalla.
 <h3>Cambios realizados</h3>
 La velocidad de la bala es mayor
+
 ```python
+def tap(x, y):
+    """Respond to screen tap."""
+    if not inside(ball):
+        ball.x = -199
+        ball.y = -199
+        speed.x = (x + 200) / 5 
+        speed.y = (y + 200) / 5
 ```
 Los globos se mueven más rápido
+
 ```python
+def move():
+    """Move ball and targets."""
+    if randrange(40) == 0:
+        y = randrange(-150, 150)
+        target = vector(200, y)
+        targets.append(target)
+
+    for target in targets:
+        target.x -= 5
 ```
-El juego es infinito
-```python
-```
+El juego no tiene fin, los glosbos siguen apareciendo
 <h2>Memory</h2>
 <h3>Descripción</h3>
 Juego de rompecabezas de pares de números. Haga clic en un mosaico para revelar un número. Haga coincidir dos números y las fichas desaparecerán para revelar una imagen.
