@@ -78,8 +78,11 @@ def draw():
         goto(x + 2, y)
         color('black')
         write(tiles[mark], font=('Arial', 30, 'normal'))
-        
-    write(counter, font=('Arial', 30, 'normal'))
+    
+    up()
+    goto(200, 200)
+    color('red')
+    write(counter, font=('Arial', 20, 'normal'))
     update()
     ontimer(draw, 100)
 
