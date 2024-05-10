@@ -9,16 +9,16 @@ Exercises:
 5. Use letters instead of tiles.
 """
 
-from random import *
+from random import shuffle
 from turtle import *
 
 from freegames import path
 
 car = path('car.gif')
-tiles = list(range(32)) * 2
-state = {'mark': None}
+letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'Ñ', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'aa', 'bb', 'cc', 'dd', 'ee']  * 2
+state = {'mark': None, 'won' : False}
 hide = [True] * 64
-
+counter = 0
 
 def square(x, y):
     """Draw white square with black outline at (x, y)."""
@@ -27,7 +27,7 @@ def square(x, y):
     down()
     color('black', 'white')
     begin_fill()
-    for count in range(4):
+    for _ in range(4):
         forward(50)
         left(90)
     end_fill()
@@ -45,10 +45,12 @@ def xy(count):
 
 def tap(x, y):
     """Update mark and hidden tiles based on tap."""
+    global counter
+    counter += 1
     spot = index(x, y)
     mark = state['mark']
 
-    if mark is None or mark == spot or tiles[mark] != tiles[spot]:
+    if mark is None or mark == spot or letters[mark] != letters[spot]:
         state['mark'] = spot
     else:
         hide[spot] = False
@@ -73,15 +75,25 @@ def draw():
     if mark is not None and hide[mark]:
         x, y = xy(mark)
         up()
-        goto(x + 2, y)
+        goto(x + 10, y + 10)
         color('black')
-        write(tiles[mark], font=('Arial', 30, 'normal'))
+        write(letters[mark], font=('Arial', 30, 'normal'))
 
+    if not any(hide) and not state['won']:
+        up()
+        goto(-200, 100) # Mueve el cursor al centro de la pantalla
+        color('red')
+        write("¡Felicidades! Has encontrado todos los pares", font=('Arial', 15, 'normal'))
+        #state['won'] = True
+
+    up()
+    goto(200, 200)
+    color('red')
+    write(counter, font=('Arial', 20, 'normal'))
     update()
     ontimer(draw, 100)
 
-
-shuffle(tiles)
+shuffle(letters)
 setup(420, 420, 370, 0)
 addshape(car)
 hideturtle()
