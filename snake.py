@@ -28,7 +28,8 @@ def change(x, y):
     """Change snake direction."""
     aim.x = x
     aim.y = y
-
+    food.x = max(min(food.x + randrange(-1, 2) * 10, 190), -200)
+    food.y = max(min(food.y + randrange(-1, 2) * 10, 190), -200)
 
 def inside(head):
     """Return True if head inside boundaries."""
