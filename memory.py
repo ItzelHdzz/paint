@@ -16,7 +16,7 @@ from freegames import path
 
 car = path('car.gif')
 tiles = list(range(32)) * 2
-state = {'mark': None}
+state = {'mark': None, 'won' : False}
 hide = [True] * 64
 
 
@@ -73,9 +73,16 @@ def draw():
     if mark is not None and hide[mark]:
         x, y = xy(mark)
         up()
-        goto(x + 2, y)
+        goto(x + 10, y + 10)
         color('black')
-        write(tiles[mark], font=('Arial', 30, 'normal'))
+        write(tiles[mark], font=('Arial', 20, 'normal'))
+
+    if not any(hide) and not state['won']:
+        up()
+        goto(-200, 100) # Mueve el cursor al centro de la pantalla
+        color('red')
+        write("¡Felicidades! Has encontrado todos los pares", font=('Arial', 15, 'normal'))
+        #state['won'] = True
 
     update()
     ontimer(draw, 100)
