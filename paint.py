@@ -1,18 +1,17 @@
 """Paint, for drawing shapes.
-Prueba 1
-Exercises
-
-1. Add a color.
-2. Complete circle.
-3. Complete rectangle.
-4. Complete triangle.
-5. Add width parameter.
+    Ana Itzel Hernandez Garcia
+    Paola Rojas Dominguez
+    
+Changes made:
+    -Pink color added
+    -Circle function completed
+    -Rectangle function completed
+    -Triangle function completed
 """
 
+#Import libraries
 from turtle import *
-
 from freegames import vector
-
 import math
 
 def line(start, end):
@@ -118,12 +117,14 @@ setup(420, 420, 370, 0)
 onscreenclick(tap)
 listen()
 onkey(undo, 'u')
+#Colors you can draw with
 onkey(lambda: color('black'), 'K')
 onkey(lambda: color('white'), 'W')
 onkey(lambda: color('green'), 'G')
 onkey(lambda: color('blue'), 'B')
 onkey(lambda: color('red'), 'R')
-onkey(lambda: color('pink'), 'P')
+onkey(lambda: color('pink'), 'P') #New color added
+#Figures that can be drawn
 onkey(lambda: store('shape', line), 'l')
 onkey(lambda: store('shape', square), 's')
 onkey(lambda: store('shape', circle), 'c')
