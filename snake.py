@@ -1,6 +1,6 @@
 """Snake, classic arcade game.
-Ana Itzel Hernández García 
-Paola Rojas Domínguez 
+Ana Itzel Hernández García | A01737526
+Paola Rojas Domínguez | A01737136
 
 Exercises
 The food can move with the snake.
