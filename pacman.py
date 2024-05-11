@@ -1,12 +1,10 @@
 """Pacman, classic arcade game.
-
+Ana Itzel Hernández García | A01737526
+Paola Rojas Domínguez | A01737136
 Exercises
-
-1. Change the board.
-2. Change the number of ghosts.
-3. Change where pacman starts.
-4. Make the ghosts faster/slower.
-5. Make the ghosts smarter.
+Change the board.
+Make the ghosts faster.
+Make the ghosts smarter.
 """
 
 from random import choice
@@ -14,11 +12,13 @@ from turtle import *
 
 from freegames import floor, vector
 
+#Initislize the game values 
 state = {'score': 0}
 path = Turtle(visible=False)
 writer = Turtle(visible=False)
 aim = vector(5, 0)
 pacman = vector(-40, -80)
+# Initialize the positions and directions of the ghosts
 ghosts = [
     [vector(-180, 160), vector(10, 0)],
     [vector(-180, -160), vector(0, 10)],
@@ -26,6 +26,7 @@ ghosts = [
     [vector(100, -160), vector(-10, 0)],
 ]
 # fmt: off
+# Define the game world as a 2D array of tiles
 tiles = [
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
@@ -50,7 +51,7 @@ tiles = [
 ]
 # fmt: on
 
-
+#Function to draw a square at a specified position.
 def square(x, y):
     """Draw square using path at (x, y)."""
     path.up()
@@ -64,7 +65,7 @@ def square(x, y):
 
     path.end_fill()
 
-
+#Function to calculate the offset of a point in the tile grid.
 def offset(point):
     """Return offset of point in tiles."""
     x = (floor(point.x, 20) + 200) / 20
@@ -72,7 +73,7 @@ def offset(point):
     index = int(x + y * 20)
     return index
 
-
+#Function to check if a point is valid in the tile grid.
 def valid(point):
     """Return True if point is valid in tiles."""
     index = offset(point)
@@ -87,7 +88,7 @@ def valid(point):
 
     return point.x % 20 == 0 or point.y % 20 == 0
 
-
+#Function to draw the game world.
 def world():
     """Draw world using path."""
     bgcolor('black')
@@ -106,7 +107,7 @@ def world():
                 path.goto(x + 10, y + 10)
                 path.dot(2, 'white')
 
-
+#Function to move Pacman and all ghosts.
 def move():
     """Move pacman and all ghosts."""
     writer.undo()
@@ -165,7 +166,7 @@ def move():
 
     ontimer(move, 100)
 
-
+#Function to change Pacman's aim.
 def change(x, y):
     """Change pacman aim if valid."""
     if valid(pacman + vector(x, y)):
