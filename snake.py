@@ -1,12 +1,12 @@
 """Snake, classic arcade game.
+Ana Itzel Hernández García 
+Paola Rojas Domínguez 
 
 Exercises
-
-1. How do you make the snake faster or slower?
-2. How can you make the snake go around the edges?
-3. How would you move the food?
-4. Change the snake to respond to mouse clicks.
+The food can move with the snake.
+The snake and the food can change the color.
 """
+
 
 from random import randrange, choice
 from turtle import *
@@ -16,6 +16,7 @@ from freegames import square, vector
 # Define a list of 5 colors (excluding red)
 colors = ['blue', 'green', 'yellow', 'orange', 'purple']
 
+# Initialize snake and food
 food = vector(0, 0)
 snake = [vector(10, 0)]
 aim = vector(0, -10)
@@ -24,6 +25,7 @@ aim = vector(0, -10)
 snake_color = choice(colors)
 food_color = choice([color for color in colors if color!= snake_color])
 
+# Set aim direction to (x, y)
 def change(x, y):
     """Change snake direction."""
     aim.x = x
@@ -31,6 +33,7 @@ def change(x, y):
     food.x = max(min(food.x + randrange(-1, 2) * 10, 190), -200)
     food.y = max(min(food.y + randrange(-1, 2) * 10, 190), -200)
 
+# Check if head position is within boundaries
 def inside(head):
     """Return True if head inside boundaries."""
     return -200 < head.x < 190 and -200 < head.y < 190
@@ -41,6 +44,7 @@ def move():
     head = snake[-1].copy()
     head.move(aim)
 
+    # Check if the head is inside boundaries and not colliding with itself
     if not inside(head) or head in snake:
         square(head.x, head.y, 9, 'red')
         update()
@@ -48,6 +52,7 @@ def move():
 
     snake.append(head)
 
+    # Check if the head has reached the food
     if head == food:
         print('Snake:', len(snake))
         food.x = randrange(-15, 15) * 10
@@ -55,6 +60,7 @@ def move():
     else:
         snake.pop(0)
 
+    # Clear the screen and draw the snake and food
     clear()
 
     for body in snake:
