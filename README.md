@@ -78,23 +78,74 @@ def triangle(start, end):
 Clásico juego de arcade. Utilice las teclas de flecha para navegar y comer la comida. Cada vez que se consuma, la serpiente crece un segmento más. ¡Evita comerte o salirte de los límites!
 <h3>Cambios realizados</h3>
 La comida se mueve un espacio cada vez que la serpiente cambia de dirección
+
 ```python
+def change(x, y):
+    """Change snake direction."""
+    aim.x = x
+    aim.y = y
+    food.x = max(min(food.x + randrange(-1, 2) * 10, 190), -200)
+    food.y = max(min(food.y + randrange(-1, 2) * 10, 190), -200)
 ```
 La serpiente y la comida cambian de color cada vez que se inicia el juego
 ```python
+snake_color = choice(colors)
+food_color = choice([color for color in colors if color!= snake_color])
 ```
 <h2>Pacman</h2>
 <h3>Descripción</h3>
 Clásico juego de arcade. Usa las teclas de flecha para navegar y comer toda la comida blanca. Cuidado con los fantasmas rojos que deambulan por el laberinto.
 <h3>Cambios realizados</h3>
 Los fantasmas siguen de mejor forma a pacman
+
 ```python
+dist = abs(pacman - point)
+
+        if dist < 100:
+            course.x = aim.x
+            course.y = aim.y
 ```
-El tablero fue modigficado
+El tablero fue modificado
+
 ```python
+tiles = [
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
+    0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0,
+    0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
+    0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0,
+    0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0,
+    0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0,
+    0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0,
+    0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
+    0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0,
+    0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0,
+    0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0,
+    0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0,
+    0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0,
+    0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0,
+    0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0,
+    0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0,
+    0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+]
 ```
 Los fantasmas son más rápidos
 ```python
+for point, course in ghosts:
+        if valid(point + course):
+            point.move(course)
+        else:
+            options = [
+                vector(10, 0),
+                vector(-10, 0),
+                vector(0, 10),
+                vector(0, -10),
+            ]
+            plan = choice(options)
+            course.x = plan.x
+            course.y = plan.y
 ```
 <h2>Cannon</h2>
 <h3>Descripción</h3>
@@ -124,7 +175,7 @@ def move():
     for target in targets:
         target.x -= 5
 ```
-El juego no tiene fin, los glosbos siguen apareciendo
+El juego no tiene fin, los globos siguen apareciendo
 <h2>Memory</h2>
 <h3>Descripción</h3>
 Juego de rompecabezas de pares de números. Haga clic en un mosaico para revelar un número. Haga coincidir dos números y las fichas desaparecerán para revelar una imagen.
